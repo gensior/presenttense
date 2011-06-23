@@ -1,9 +1,9 @@
 from mx.DateTime import DateTime, DateTimeDeltaFromSeconds, now
 
 present = now()
+historystart = DateTime(-10000, 1, 1)
 
 def historical(historyend=DateTime(present.year, 12, 31, 23, 59, 59)):
-	historystart = DateTime(-10000, 1 ,1)
 	return (historyend - historystart).seconds
 
 def yearical(yearend=DateTime(present.year, 12, 31, 23, 59, 59)):
@@ -25,3 +25,10 @@ def historify(yeardate):
 	historyscale = historical()
 	historypoint = DateTimeDeltaFromSeconds(historyscale * yearratio)
 	return DateTime(present.year, 12, 31, 23, 59, 59) - historypoint
+
+def epoch_to_historical(seconds):
+    diff = DateTimeDeltaFromSeconds(seconds)
+    return historystart + diff
+
+def epoch_to_yearical(seconds):
+    return yearify(epoch_to_historical(seconds))
