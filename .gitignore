@@ -1,2 +1,4 @@
 *.pyc
 *.db
+myproject/basic/*
+.DS_store
